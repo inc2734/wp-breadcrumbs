@@ -1,0 +1,19 @@
+{
+  "name": "inc2734/wp-breadcrumbs",
+  "description": "A library for WordPress breadcrumbs.",
+  "license": "GPL-2.0+",
+  "require": {
+    "php": ">=5.3"
+  },
+  "authors": [
+    {
+      "name": "Takashi Kitajima",
+      "email": "inc@2inc.org"
+    }
+  ],
+  "autoload": {
+    "psr-4" : {
+      "Inc2734\\WP_Breadcrumbs\\" : "src"
+    }
+  }
+}
