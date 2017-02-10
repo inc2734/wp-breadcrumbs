@@ -25,7 +25,11 @@ class FrontPage extends AbstractBreadcrumbs {
 	 */
 	protected function get_home_label() {
 		$page_on_front = get_option( 'page_on_front' );
-		$home_label    = __( 'ホーム' );
+		if ( 'ja' === get_locale() ) {
+			$home_label = __( 'ホーム' );
+		} else {
+			$home_label = __( 'Home' );
+		}
 		if ( $page_on_front ) {
 			$home_label = get_the_title( $page_on_front );
 		}

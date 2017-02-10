@@ -56,7 +56,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
 		$this->assertEquals(
 			[
-				[ 'title' => 'ホーム', 'link'  => '' ]
+				[ 'title' => 'Home', 'link'  => '' ]
 			],
 			$breadcrumbs->get()
 		);
@@ -84,7 +84,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
 		$this->assertEquals(
 			[
-				[ 'title' => 'ホーム', 'link' => 'http://example.org' ],
+				[ 'title' => 'Home', 'link' => 'http://example.org' ],
 				[ 'title' => $category->name, 'link' => '' ]
 			],
 			$breadcrumbs->get()
@@ -97,7 +97,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
 		$this->assertEquals(
 			[
-				[ 'title' => 'ホーム', 'link' => 'http://example.org' ],
+				[ 'title' => 'Home', 'link' => 'http://example.org' ],
 				[ 'title' => $post_tag->name, 'link' => '' ]
 			],
 			$breadcrumbs->get()
@@ -112,7 +112,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$breadcrumb_year = new \Inc2734\WP_Breadcrumbs\Year();
 		$this->assertEquals(
 			[
-				[ 'title' => 'ホーム', 'link' => 'http://example.org' ],
+				[ 'title' => 'Home', 'link' => 'http://example.org' ],
 				[ 'title' => $breadcrumb_year->year( $year ), 'link' => '' ]
 			],
 			$breadcrumbs->get()
@@ -128,7 +128,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$breadcrumb_month = new \Inc2734\WP_Breadcrumbs\Month();
 		$this->assertEquals(
 			[
-				[ 'title' => 'ホーム', 'link' => 'http://example.org' ],
+				[ 'title' => 'Home', 'link' => 'http://example.org' ],
 				[ 'title' => $breadcrumb_month->year( $year ), 'link' => "http://example.org/$year/" ],
 				[ 'title' => $breadcrumb_month->month( $month ), 'link' => '' ]
 			],
@@ -146,7 +146,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$breadcrumb_day = new \Inc2734\WP_Breadcrumbs\Day();
 		$this->assertEquals(
 			[
-				[ 'title' => 'ホーム', 'link' => 'http://example.org' ],
+				[ 'title' => 'Home', 'link' => 'http://example.org' ],
 				[ 'title' => $breadcrumb_day->year( $year ), 'link' => "http://example.org/$year/" ],
 				[ 'title' => $breadcrumb_day->month( $month ), 'link' => "http://example.org/$year/" . sprintf( '%02d', $month ) . "/" ],
 				[ 'title' => $breadcrumb_day->day( $day ), 'link' => '' ]
@@ -162,7 +162,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
 		$this->assertEquals(
 			[
-				[ 'title' => 'ホーム', 'link' => 'http://example.org' ],
+				[ 'title' => 'Home', 'link' => 'http://example.org' ],
 				[ 'title' => get_the_author_meta( 'user_login', $this->author ), 'link' => '' ],
 			],
 			$breadcrumbs->get()
@@ -177,7 +177,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
 		$this->assertEquals(
 			[
-				[ 'title' => 'ホーム', 'link' => 'http://example.org' ],
+				[ 'title' => 'Home', 'link' => 'http://example.org' ],
 				[ 'title' => $categories[0]->name, 'link' => get_term_link( $categories[0] ) ],
 				[ 'title' => get_the_title( $newest_post ), 'link' => '' ],
 			],
@@ -192,7 +192,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$post_type_object = get_post_type_object( $custom_post->post_type );
 		$this->assertEquals(
 			[
-				[ 'title' => 'ホーム', 'link' => 'http://example.org' ],
+				[ 'title' => 'Home', 'link' => 'http://example.org' ],
 				[ 'title' => $post_type_object->label, 'link' => get_post_type_archive_link( $custom_post->post_type ) ],
 				[ 'title' => get_the_title( $custom_post_type_id ), 'link' => '' ],
 			],
@@ -208,7 +208,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$post_type_object = get_post_type_object( $this->post_type );
 		$this->assertEquals(
 			[
-				[ 'title' => 'ホーム', 'link' => 'http://example.org' ],
+				[ 'title' => 'Home', 'link' => 'http://example.org' ],
 				[ 'title' => $post_type_object->label, 'link' => '' ],
 			],
 			$breadcrumbs->get()
@@ -222,7 +222,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$post_type_object = get_post_type_object( $this->post_type );
 		$this->assertEquals(
 			[
-				[ 'title' => 'ホーム', 'link' => 'http://example.org' ],
+				[ 'title' => 'Home', 'link' => 'http://example.org' ],
 				[ 'title' => $post_type_object->label, 'link' => '' ],
 			],
 			$breadcrumbs->get()
