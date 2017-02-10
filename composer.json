@@ -2,7 +2,7 @@
   "name": "inc2734/wp-breadcrumbs",
   "description": "A library for WordPress breadcrumbs.",
   "license": "GPL-2.0+",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "require": {
     "php": ">=5.3"
   },
