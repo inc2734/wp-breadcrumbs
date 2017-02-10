@@ -3,7 +3,8 @@
   "description": "A library for WordPress breadcrumbs.",
   "license": "GPL-2.0+",
   "require": {
-    "php": ">=5.3"
+    "php": ">=5.3",
+    "phpunit/phpunit": "^5.7"
   },
   "authors": [
     {
