@@ -1,7 +1,5 @@
 <?php
-namespace Inc2734\WP_Breadcrumbs;
-
-class Author extends AbstractBreadcrumbs {
+class Inc2734_WP_Breadcrumbs_Author extends Inc2734_WP_Breadcrumbs_Abstract_Controller {
 
 	/**
 	 * Sets breadcrumbs items

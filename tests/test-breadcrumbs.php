@@ -109,7 +109,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$year = date( 'Y', strtotime( $newest_post->post_date ) );
 		$this->go_to( get_year_link( $year ) );
 		$breadcrumbs     = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
-		$breadcrumb_year = new \Inc2734\WP_Breadcrumbs\Year();
+		$breadcrumb_year = new \Inc2734_WP_Breadcrumbs_Year();
 		$this->assertEquals(
 			[
 				[ 'title' => 'Home', 'link' => 'http://example.org' ],
@@ -125,7 +125,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$month = date( 'n', strtotime( $newest_post->post_date ) );
 		$this->go_to( get_month_link( $year, $month ) );
 		$breadcrumbs      = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
-		$breadcrumb_month = new \Inc2734\WP_Breadcrumbs\Month();
+		$breadcrumb_month = new \Inc2734_WP_Breadcrumbs_Month();
 		$this->assertEquals(
 			[
 				[ 'title' => 'Home', 'link' => 'http://example.org' ],
@@ -143,7 +143,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$day   = date( 'j', strtotime( $newest_post->post_date ) );
 		$this->go_to( get_day_link( $year, $month, $day ) );
 		$breadcrumbs    = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
-		$breadcrumb_day = new \Inc2734\WP_Breadcrumbs\Day();
+		$breadcrumb_day = new \Inc2734_WP_Breadcrumbs_Day();
 		$this->assertEquals(
 			[
 				[ 'title' => 'Home', 'link' => 'http://example.org' ],

@@ -1,7 +1,5 @@
 <?php
-namespace Inc2734\WP_Breadcrumbs;
-
-class Year extends AbstractBreadcrumbs {
+class Inc2734_WP_Breadcrumbs_Year extends Inc2734_WP_Breadcrumbs_Abstract_Controller {
 
 	/**
 	 * Sets breadcrumbs items

@@ -1,7 +1,5 @@
 <?php
-namespace Inc2734\WP_Breadcrumbs;
-
-class FrontPage extends AbstractBreadcrumbs {
+class Inc2734_WP_Breadcrumbs_Front_Page extends Inc2734_WP_Breadcrumbs_Abstract_Controller {
 
 	/**
 	 * Sets breadcrumbs items

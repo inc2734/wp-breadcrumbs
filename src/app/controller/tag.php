@@ -1,7 +1,5 @@
 <?php
-namespace Inc2734\WP_Breadcrumbs;
-
-class Tag extends AbstractBreadcrumbs {
+class Inc2734_WP_Breadcrumbs_Tag extends Inc2734_WP_Breadcrumbs_Abstract_Controller {
 
 	/**
 	 * Sets breadcrumbs items

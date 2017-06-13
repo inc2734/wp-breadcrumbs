@@ -8,7 +8,13 @@ $ composer require inc2734/wp-breadcrumbs
 ## How to use
 ```
 <?php
-$breadcrumbs = new Inc2734\WP_Breadcrumbs\Breadcrumbs();
+// When Using composer auto loader
+// $breadcrumbs = new Inc2734\WP_Breadcrumbs\Breadcrumbs();
+
+// When not Using composer auto loader
+include_once( get_template_directory() . '/vendor/inc2734/wp-breadcrumbs/src/wp-breadcrumbs.php' );
+$breadcrumbs = new Inc2734_WP_Breadcrumbs();
+
 $items = array_values( $breadcrumbs->get() );
 ?>
 <div class="c-breadcrumbs">

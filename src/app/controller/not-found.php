@@ -1,7 +1,5 @@
 <?php
-namespace Inc2734\WP_Breadcrumbs;
-
-class NotFound extends AbstractBreadcrumbs {
+class Inc2734_WP_Breadcrumbs_Not_Found extends Inc2734_WP_Breadcrumbs_Abstract_Controller {
 
 	/**
 	 * Sets breadcrumbs items
