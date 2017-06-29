@@ -16,10 +16,9 @@ $ composer require inc2734/wp-breadcrumbs
 // $breadcrumbs = new Inc2734\WP_Breadcrumbs\Breadcrumbs();
 
 // When not Using composer auto loader
-include_once( get_template_directory() . '/vendor/inc2734/wp-breadcrumbs/src/wp-breadcrumbs.php' );
+include_once( get_theme_file_path( '/vendor/inc2734/wp-breadcrumbs/src/wp-breadcrumbs.php' ) );
 $breadcrumbs = new Inc2734_WP_Breadcrumbs();
-
-$items = array_values( $breadcrumbs->get() );
+$items = $breadcrumbs->get();
 ?>
 <div class="c-breadcrumbs">
 	<div class="container">
