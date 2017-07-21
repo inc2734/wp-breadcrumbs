@@ -24,6 +24,8 @@ class Inc2734_WP_Breadcrumbs {
 	 * @SuppressWarnings(PHPMD.CyclomaticComplexity)
 	 */
 	public function __construct() {
+		load_textdomain( 'inc2734-wp-breadcrumbs', __DIR__ . '/languages/' . get_locale() . '.mo' );
+
 		$breadcrumb = new Inc2734_WP_Breadcrumbs_Front_Page();
 		$this->_set_items( $breadcrumb->get() );
 

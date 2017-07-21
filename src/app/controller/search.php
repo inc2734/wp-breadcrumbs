@@ -9,7 +9,7 @@ class Inc2734_WP_Breadcrumbs_Search extends Inc2734_WP_Breadcrumbs_Abstract_Cont
 	protected function set_items() {
 		$this->set(
 			sprintf(
-				__( '「%s」の検索結果' ),
+				__( 'Search results of "%1$s"', 'inc2734-wp-breadcrumbs' ),
 				get_search_query()
 			)
 		);

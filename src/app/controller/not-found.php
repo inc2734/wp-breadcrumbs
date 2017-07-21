@@ -7,6 +7,6 @@ class Inc2734_WP_Breadcrumbs_Not_Found extends Inc2734_WP_Breadcrumbs_Abstract_C
 	 * @return void
 	 */
 	protected function set_items() {
-		$this->set( __( 'ページが見つかりませんでした' ) );
+		$this->set( __( 'Page not found', 'inc2734-wp-breadcrumbs' ) );
 	}
 }

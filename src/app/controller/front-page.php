@@ -23,11 +23,7 @@ class Inc2734_WP_Breadcrumbs_Front_Page extends Inc2734_WP_Breadcrumbs_Abstract_
 	 */
 	protected function get_home_label() {
 		$page_on_front = get_option( 'page_on_front' );
-		if ( 'ja' === get_locale() ) {
-			$home_label = __( 'ホーム' );
-		} else {
-			$home_label = __( 'Home' );
-		}
+		$home_label = __( 'Home', 'inc2734-wp-breadcrumbs' );
 		if ( $page_on_front ) {
 			$home_label = get_the_title( $page_on_front );
 		}
