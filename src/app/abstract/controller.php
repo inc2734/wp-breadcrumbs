@@ -1,7 +1,10 @@
 <?php
 /**
- * @SuppressWarnings(PHPMD.NumberOfChildren)
+ * @package inc2734/wp-breadcrumbs
+ * @author inc2734
+ * @license GPL-2.0+
  */
+
 abstract class Inc2734_WP_Breadcrumbs_Abstract_Controller {
 
 	/**

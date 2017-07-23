@@ -1,4 +1,10 @@
 <?php
+/**
+ * @package inc2734/wp-breadcrumbs
+ * @author inc2734
+ * @license GPL-2.0+
+ */
+
 class Inc2734_WP_Breadcrumbs_Post_Type_Archive extends Inc2734_WP_Breadcrumbs_Abstract_Controller {
 
 	/**

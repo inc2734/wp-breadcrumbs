@@ -1,17 +1,10 @@
 <?php
-$includes = array(
-	'/app/abstract',
-	'/app/controller',
-);
-foreach ( $includes as $include ) {
-	foreach ( glob( __DIR__ . $include . '/*.php' ) as $file ) {
-		require_once( $file );
-	}
-}
-
 /**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @package inc2734/wp-breadcrumbs
+ * @author inc2734
+ * @license GPL-2.0+
  */
+
 class Inc2734_WP_Breadcrumbs {
 
 	/**
@@ -20,11 +13,18 @@ class Inc2734_WP_Breadcrumbs {
 	 */
 	protected $breadcrumbs = array();
 
-	/**
-	 * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-	 */
 	public function __construct() {
 		load_textdomain( 'inc2734-wp-breadcrumbs', __DIR__ . '/languages/' . get_locale() . '.mo' );
+
+		$includes = array(
+			'/app/abstract',
+			'/app/controller',
+		);
+		foreach ( $includes as $include ) {
+			foreach ( glob( __DIR__ . $include . '/*.php' ) as $file ) {
+				require_once( $file );
+			}
+		}
 
 		$breadcrumb = new Inc2734_WP_Breadcrumbs_Front_Page();
 		$this->_set_items( $breadcrumb->get() );
