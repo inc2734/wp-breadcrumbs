@@ -5,6 +5,11 @@
  * @license GPL-2.0+
  */
 
+/**
+ * Abstract breadcrumbs item class
+ *
+ * @SuppressWarnings(PHPMD.NumberOfChildren)
+ */
 abstract class Inc2734_WP_Breadcrumbs_Abstract_Controller {
 
 	/**

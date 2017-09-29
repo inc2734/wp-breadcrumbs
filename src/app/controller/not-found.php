@@ -5,6 +5,9 @@
  * @license GPL-2.0+
  */
 
+/**
+ * Not found item of breadcrumbs
+ */
 class Inc2734_WP_Breadcrumbs_Not_Found extends Inc2734_WP_Breadcrumbs_Abstract_Controller {
 
 	/**

@@ -5,6 +5,9 @@
  * @license GPL-2.0+
  */
 
+/**
+ * Blog item of breadcrumbs
+ */
 class Inc2734_WP_Breadcrumbs_Blog extends Inc2734_WP_Breadcrumbs_Abstract_Controller {
 
 	/**

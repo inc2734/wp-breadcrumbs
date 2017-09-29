@@ -5,6 +5,9 @@
  * @license GPL-2.0+
  */
 
+/**
+ * Search item of breadcrumbs
+ */
 class Inc2734_WP_Breadcrumbs_Search extends Inc2734_WP_Breadcrumbs_Abstract_Controller {
 
 	/**

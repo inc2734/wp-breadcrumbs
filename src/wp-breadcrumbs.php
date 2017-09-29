@@ -5,6 +5,11 @@
  * @license GPL-2.0+
  */
 
+/**
+ * Create array for breadcrumbs
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class Inc2734_WP_Breadcrumbs {
 
 	/**
@@ -13,6 +18,10 @@ class Inc2734_WP_Breadcrumbs {
 	 */
 	protected $breadcrumbs = array();
 
+	/**
+	 * @todo
+	 * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+	 */
 	public function __construct() {
 		load_textdomain( 'inc2734-wp-breadcrumbs', __DIR__ . '/languages/' . get_locale() . '.mo' );
 

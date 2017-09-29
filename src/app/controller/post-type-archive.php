@@ -5,6 +5,9 @@
  * @license GPL-2.0+
  */
 
+/**
+ * Post type archive item of breadcrumbs
+ */
 class Inc2734_WP_Breadcrumbs_Post_Type_Archive extends Inc2734_WP_Breadcrumbs_Abstract_Controller {
 
 	/**
