@@ -25,7 +25,9 @@ class Inc2734_WP_Breadcrumbs_Taxonomy extends Inc2734_WP_Breadcrumbs_Abstract_Co
 		if ( $post_type ) {
 			$post_type_object = get_post_type_object( $post_type );
 			$label = $post_type_object->label;
-			$this->set( $label, $this->get_post_type_archive_link( $post_type ) );
+			if ( $post_type_object->has_archive ) {
+				$this->set( $label, $this->get_post_type_archive_link( $post_type ) );
+			}
 		}
 
 		if ( is_taxonomy_hierarchical( $taxonomy ) && $term->parent ) {

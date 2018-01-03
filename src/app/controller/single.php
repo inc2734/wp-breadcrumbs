@@ -17,10 +17,13 @@ class Inc2734_WP_Breadcrumbs_Single extends Inc2734_WP_Breadcrumbs_Abstract_Cont
 	 */
 	protected function set_items() {
 		$post_type = $this->get_post_type();
+		$post_type_object = get_post_type_object( $post_type );
 
 		if ( $post_type && 'post' !== $post_type ) {
-			$this->set_post_type_archive( $post_type );
-			$this->set_terms( $post_type );
+			if ( $post_type_object->has_archive ) {
+				$this->set_post_type_archive( $post_type, $post_type_object );
+			}
+			$this->set_terms( $post_type, $post_type_object );
 		} else {
 			$this->set_categories();
 		}
@@ -32,10 +35,10 @@ class Inc2734_WP_Breadcrumbs_Single extends Inc2734_WP_Breadcrumbs_Abstract_Cont
 	 * Sets Breadcrumbs items of post type archive
 	 *
 	 * @param string $post_type
+	 * @param object $post_type_object
 	 * @return void
 	 */
-	protected function set_post_type_archive( $post_type ) {
-		$post_type_object = get_post_type_object( $post_type );
+	protected function set_post_type_archive( $post_type, $post_type_object ) {
 		$label = $post_type_object->label;
 		$this->set( $label, $this->get_post_type_archive_link( $post_type ) );
 	}
@@ -44,10 +47,10 @@ class Inc2734_WP_Breadcrumbs_Single extends Inc2734_WP_Breadcrumbs_Abstract_Cont
 	 * Sets Breadcrumbs items of terms
 	 *
 	 * @param string $post_type
+	 * @param object $post_type_object
 	 * @return void
 	 */
-	protected function set_terms( $post_type ) {
-		$post_type_object = get_post_type_object( $post_type );
+	protected function set_terms( $post_type, $post_type_object ) {
 		$taxonomies = $post_type_object->taxonomies;
 		if ( ! $taxonomies ) {
 			return;
