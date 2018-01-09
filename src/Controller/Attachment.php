@@ -5,10 +5,12 @@
  * @license GPL-2.0+
  */
 
+namespace Inc2734\WP_Breadcrumbs\Controller;
+
 /**
- * Not found item of breadcrumbs
+ * Attachment item of breadcrumbs
  */
-class Inc2734_WP_Breadcrumbs_Not_Found extends Inc2734_WP_Breadcrumbs_Abstract_Controller {
+class Attachment extends Controller {
 
 	/**
 	 * Sets breadcrumbs items
@@ -16,6 +18,6 @@ class Inc2734_WP_Breadcrumbs_Not_Found extends Inc2734_WP_Breadcrumbs_Abstract_C
 	 * @return void
 	 */
 	protected function set_items() {
-		$this->set( __( 'Page not found', 'inc2734-wp-breadcrumbs' ) );
+		$this->set( get_the_title() );
 	}
 }

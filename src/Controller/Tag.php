@@ -5,10 +5,12 @@
  * @license GPL-2.0+
  */
 
+namespace Inc2734\WP_Breadcrumbs\Controller;
+
 /**
- * Page item of breadcrumbs
+ * Tag item of breadcrumbs
  */
-class Inc2734_WP_Breadcrumbs_Page extends Inc2734_WP_Breadcrumbs_Abstract_Controller {
+class Tag extends Controller {
 
 	/**
 	 * Sets breadcrumbs items
@@ -16,7 +18,6 @@ class Inc2734_WP_Breadcrumbs_Page extends Inc2734_WP_Breadcrumbs_Abstract_Contro
 	 * @return void
 	 */
 	protected function set_items() {
-		$this->set_ancestors( get_the_ID(), 'page' );
-		$this->set( get_the_title() );
+		$this->set( single_tag_title( '', false ) );
 	}
 }

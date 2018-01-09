@@ -5,10 +5,12 @@
  * @license GPL-2.0+
  */
 
+namespace Inc2734\WP_Breadcrumbs\Controller;
+
 /**
- * Attachment item of breadcrumbs
+ * Page item of breadcrumbs
  */
-class Inc2734_WP_Breadcrumbs_Attachment extends Inc2734_WP_Breadcrumbs_Abstract_Controller {
+class Page extends Controller {
 
 	/**
 	 * Sets breadcrumbs items
@@ -16,6 +18,7 @@ class Inc2734_WP_Breadcrumbs_Attachment extends Inc2734_WP_Breadcrumbs_Abstract_
 	 * @return void
 	 */
 	protected function set_items() {
+		$this->set_ancestors( get_the_ID(), 'page' );
 		$this->set( get_the_title() );
 	}
 }

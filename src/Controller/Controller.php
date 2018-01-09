@@ -5,18 +5,20 @@
  * @license GPL-2.0+
  */
 
+namespace Inc2734\WP_Breadcrumbs\Controller;
+
 /**
  * Abstract breadcrumbs item class
  *
  * @SuppressWarnings(PHPMD.NumberOfChildren)
  */
-abstract class Inc2734_WP_Breadcrumbs_Abstract_Controller {
+abstract class Controller {
 
 	/**
 	 * Store each item of breadcrumbs in ascending order
 	 * @var array
 	 */
-	protected $breadcrumbs = array();
+	protected $breadcrumbs = [];
 
 	public function __construct() {
 		$this->set_items();
@@ -36,10 +38,10 @@ abstract class Inc2734_WP_Breadcrumbs_Abstract_Controller {
 	 * @param string $link
 	 */
 	protected function set( $title, $link = '' ) {
-		$this->breadcrumbs[] = array(
+		$this->breadcrumbs[] = [
 			'title' => $title,
 			'link'  => $link,
-		);
+		];
 	}
 
 	/**
@@ -120,7 +122,7 @@ abstract class Inc2734_WP_Breadcrumbs_Abstract_Controller {
 		if ( 'ja' === get_locale() ) {
 			$month .= '月';
 		} else {
-			$monthes = array(
+			$monthes = [
 				1  => 'January',
 				2  => 'February',
 				3  => 'March',
@@ -133,7 +135,7 @@ abstract class Inc2734_WP_Breadcrumbs_Abstract_Controller {
 				10 => 'October',
 				11 => 'November',
 				12 => 'December',
-			);
+			];
 			$month = $monthes[ $month ];
 		}
 		return $month;

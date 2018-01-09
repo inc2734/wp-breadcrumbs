@@ -5,10 +5,12 @@
  * @license GPL-2.0+
  */
 
+namespace Inc2734\WP_Breadcrumbs\Controller;
+
 /**
  * Year item of breadcrumbs
  */
-class Inc2734_WP_Breadcrumbs_Year extends Inc2734_WP_Breadcrumbs_Abstract_Controller {
+class Year extends Controller {
 
 	/**
 	 * Sets breadcrumbs items

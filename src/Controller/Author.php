@@ -5,10 +5,12 @@
  * @license GPL-2.0+
  */
 
+namespace Inc2734\WP_Breadcrumbs\Controller;
+
 /**
  * Author item of breadcrumbs
  */
-class Inc2734_WP_Breadcrumbs_Author extends Inc2734_WP_Breadcrumbs_Abstract_Controller {
+class Author extends Controller {
 
 	/**
 	 * Sets breadcrumbs items
