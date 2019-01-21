@@ -9,23 +9,15 @@ namespace Inc2734\WP_Breadcrumbs;
 
 use Inc2734\WP_Breadcrumbs\Controller;
 
-/**
- * Create array for breadcrumbs
- *
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Breadcrumbs {
 
 	/**
 	 * Store each item of breadcrumbs in ascending order
+	 *
 	 * @var array
 	 */
 	protected $breadcrumbs = [];
 
-	/**
-	 * @todo
-	 * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-	 */
 	public function __construct() {
 		load_textdomain( 'inc2734-wp-breadcrumbs', __DIR__ . '/languages/' . get_locale() . '.mo' );
 
@@ -35,36 +27,35 @@ class Breadcrumbs {
 		$breadcrumb = new Controller\Blog();
 		$this->_set_items( $breadcrumb->get() );
 
-		if ( is_404() ) {
-			$breadcrumb = new Controller\Not_Found();
-		} elseif ( is_search() ) {
-			$breadcrumb = new Controller\Search();
-		} elseif ( is_tax() ) {
-			$breadcrumb = new Controller\Taxonomy();
-		} elseif ( is_attachment() ) {
-			$breadcrumb = new Controller\Attachment();
-		} elseif ( is_page() && ! is_front_page() ) {
-			$breadcrumb = new Controller\Page();
-		} elseif ( is_post_type_archive() ) {
-			$breadcrumb = new Controller\Post_Type_Archive();
-		} elseif ( is_single() ) {
-			$breadcrumb = new Controller\Single();
-		} elseif ( is_category() ) {
-			$breadcrumb = new Controller\Category();
-		} elseif ( is_tag() ) {
-			$breadcrumb = new Controller\Tag();
-		} elseif ( is_author() ) {
-			$breadcrumb = new Controller\Author();
-		} elseif ( is_day() ) {
-			$breadcrumb = new Controller\Day();
-		} elseif ( is_month() ) {
-			$breadcrumb = new Controller\Month();
-		} elseif ( is_year() ) {
-			$breadcrumb = new Controller\Year();
-		} elseif ( is_home() && ! is_front_page() ) {
-			$breadcrumb = new Controller\Home();
+		$controllers = array_filter(
+			[
+				'Not_Found'         => is_404(),
+				'Search'            => is_search(),
+				'Taxonomy'          => is_tax(),
+				'Attachment'        => is_attachment(),
+				'Page'              => is_page() && ! is_front_page(),
+				'Post_Type_Archive' => is_post_type_archive(),
+				'Single'            => is_single(),
+				'Category'          => is_category(),
+				'Tag'               => is_tag(),
+				'Author'            => is_author(),
+				'Day'               => is_day(),
+				'Month'             => is_month(),
+				'Year'              => is_year(),
+				'Home'              => is_home() && ! is_front_page(),
+			]
+		);
+
+		if ( ! $controllers ) {
+			return;
 		}
 
+		$class = '\Inc2734\WP_Breadcrumbs\Controller\\' . key( $controllers );
+		if ( ! class_exists( $class ) ) {
+			return;
+		}
+
+		$breadcrumb = new $class();
 		$this->_set_items( $breadcrumb->get() );
 	}
 
