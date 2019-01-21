@@ -7,10 +7,12 @@
 
 namespace Inc2734\WP_Breadcrumbs\Controller;
 
+use Inc2734\WP_Breadcrumbs\Contract\Controller\Controller as Base;
+
 /**
  * Post type archive item of breadcrumbs
  */
-class Post_Type_Archive extends Controller {
+class Post_Type_Archive extends Base {
 
 	/**
 	 * Sets breadcrumbs items

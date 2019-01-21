@@ -5,7 +5,7 @@
  * @license GPL-2.0+
  */
 
-namespace Inc2734\WP_Breadcrumbs\Controller;
+namespace Inc2734\WP_Breadcrumbs\Contract\Controller;
 
 /**
  * Abstract breadcrumbs item class
@@ -16,6 +16,7 @@ abstract class Controller {
 
 	/**
 	 * Store each item of breadcrumbs in ascending order
+	 *
 	 * @var array
 	 */
 	protected $breadcrumbs = [];

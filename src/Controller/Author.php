@@ -7,10 +7,12 @@
 
 namespace Inc2734\WP_Breadcrumbs\Controller;
 
+use Inc2734\WP_Breadcrumbs\Contract\Controller\Controller as Base;
+
 /**
  * Author item of breadcrumbs
  */
-class Author extends Controller {
+class Author extends Base {
 
 	/**
 	 * Sets breadcrumbs items

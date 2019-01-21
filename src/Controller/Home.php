@@ -7,10 +7,12 @@
 
 namespace Inc2734\WP_Breadcrumbs\Controller;
 
+use Inc2734\WP_Breadcrumbs\Contract\Controller\Controller as Base;
+
 /**
  * Home item of breadcrumbs
  */
-class Home extends Controller {
+class Home extends Base {
 
 	/**
 	 * Sets breadcrumbs items
