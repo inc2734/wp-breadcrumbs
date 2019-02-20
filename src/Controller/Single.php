@@ -53,12 +53,12 @@ class Single extends Base {
 	 * @return void
 	 */
 	protected function set_terms( $post_type_object ) {
-		$taxonomies = $post_type_object->taxonomies;
+		$taxonomies = get_object_taxonomies( $post_type_object->name );
 		if ( ! $taxonomies ) {
 			return;
 		}
 
-		$taxonomy = array_shift( $taxonomies );
+		$taxonomy = apply_filters( 'inc2734_wp_breadcrumbs_main_taxonomy', array_shift( $taxonomies ), $taxonomies, $post_type_object->name );
 		$terms    = get_the_terms( get_the_ID(), $taxonomy );
 
 		if ( ! $terms ) {
