@@ -58,7 +58,7 @@ class Single extends Base {
 			return;
 		}
 
-		$taxonomy = apply_filters( 'inc2734_wp_breadcrumbs_main_taxonomy', array_shift( $taxonomies ), $taxonomies, $post_type_object->name );
+		$taxonomy = apply_filters( 'inc2734_wp_breadcrumbs_main_taxonomy', array_shift( $taxonomies ), $taxonomies, $post_type_object );
 		$terms    = get_the_terms( get_the_ID(), $taxonomy );
 
 		if ( ! $terms ) {
