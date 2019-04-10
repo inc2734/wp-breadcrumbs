@@ -21,14 +21,12 @@ class Month extends Base {
 	 */
 	protected function set_items() {
 		$year = get_query_var( 'year' );
-		if ( $year ) {
-			$month = get_query_var( 'monthnum' );
-		} else {
-			$ymd   = get_query_var( 'm' );
-			$year  = substr( $ymd, 0, 4 );
-			$month = substr( $ymd, -2 );
+		if ( ! $year ) {
+			$ymd  = get_query_var( 'm' );
+			$year = substr( $ymd, 0, 4 );
 		}
+
 		$this->set( $this->year( $year ), get_year_link( $year ) );
-		$this->set( $this->month( $month ) );
+		$this->set( $this->get_the_archive_title() );
 	}
 }

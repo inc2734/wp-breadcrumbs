@@ -21,10 +21,10 @@ class Post_Type_Archive extends Base {
 	 */
 	protected function set_items() {
 		$post_type = $this->get_post_type();
-		if ( $post_type && 'post' !== $post_type ) {
-			$post_type_object = get_post_type_object( $post_type );
-			$label = $post_type_object->label;
-			$this->set( $label );
+		if ( ! $post_type || 'post' === $post_type ) {
+			return;
 		}
+
+		$this->set( $this->get_the_archive_title() );
 	}
 }

@@ -23,6 +23,6 @@ class Category extends Base {
 		$category_name = single_cat_title( '', false );
 		$category_id   = get_cat_ID( $category_name );
 		$this->set_ancestors( $category_id, 'category' );
-		$this->set( $category_name );
+		$this->set( $this->get_the_archive_title() );
 	}
 }

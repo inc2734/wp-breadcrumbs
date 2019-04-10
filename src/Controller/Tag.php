@@ -20,6 +20,6 @@ class Tag extends Base {
 	 * @return void
 	 */
 	protected function set_items() {
-		$this->set( single_tag_title( '', false ) );
+		$this->set( $this->get_the_archive_title() );
 	}
 }

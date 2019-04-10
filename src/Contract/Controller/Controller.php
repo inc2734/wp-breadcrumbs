@@ -80,6 +80,15 @@ abstract class Controller {
 	}
 
 	/**
+	 * Retrieve the archive title based on the queried object.
+	 *
+	 * @return string
+	 */
+	protected function get_the_archive_title() {
+		return preg_replace( '@^[^:]+: (.*)$@', '$1', get_the_archive_title() );
+	}
+
+	/**
 	 * Return the current post type
 	 *
 	 * @return string

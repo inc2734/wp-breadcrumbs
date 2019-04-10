@@ -132,7 +132,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 			[
 				[ 'title' => 'Home', 'link' => 'http://example.org' ],
 				[ 'title' => $breadcrumb_month->year( $year ), 'link' => "http://example.org/$year/" ],
-				[ 'title' => $breadcrumb_month->month( $month ), 'link' => '' ]
+				[ 'title' => get_the_date( 'F Y' ), 'link' => '' ]
 			],
 			$breadcrumbs->get()
 		);
@@ -151,7 +151,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 				[ 'title' => 'Home', 'link' => 'http://example.org' ],
 				[ 'title' => $breadcrumb_day->year( $year ), 'link' => "http://example.org/$year/" ],
 				[ 'title' => $breadcrumb_day->month( $month ), 'link' => "http://example.org/$year/" . sprintf( '%02d', $month ) . "/" ],
-				[ 'title' => $breadcrumb_day->day( $day ), 'link' => '' ]
+				[ 'title' => get_the_date( 'F j, Y' ), 'link' => '' ]
 			],
 			$breadcrumbs->get()
 		);
@@ -165,7 +165,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$this->assertEquals(
 			[
 				[ 'title' => 'Home', 'link' => 'http://example.org' ],
-				[ 'title' => get_the_author_meta( 'user_login', $this->author ), 'link' => '' ],
+				[ 'title' => '<span class="vcard">' . get_the_author_meta( 'user_login', $this->author ) . '</span>', 'link' => '' ],
 			],
 			$breadcrumbs->get()
 		);

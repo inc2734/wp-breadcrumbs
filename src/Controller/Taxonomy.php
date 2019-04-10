@@ -38,6 +38,6 @@ class Taxonomy extends Base {
 			$this->set_ancestors( $term->term_id, $taxonomy );
 		}
 
-		$this->set( $term->name );
+		$this->set( $this->get_the_archive_title() );
 	}
 }
