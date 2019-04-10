@@ -9,7 +9,7 @@ namespace Inc2734\WP_Breadcrumbs;
 
 use Inc2734\WP_Breadcrumbs\Controller;
 
-class Breadcrumbs {
+class Bootstrap {
 
 	/**
 	 * Store each item of breadcrumbs in ascending order

@@ -12,7 +12,7 @@ $ composer require inc2734/wp-breadcrumbs
 ## How to use
 ```
 <?php
-$breadcrumbs = new Inc2734\WP_Breadcrumbs\Breadcrumbs();
+$breadcrumbs = new Inc2734\WP_Breadcrumbs\Bootstrap();
 $items = $breadcrumbs->get();
 ?>
 <div class="c-breadcrumbs">

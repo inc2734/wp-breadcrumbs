@@ -55,7 +55,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 
 	public function test_front_page() {
 		$this->go_to( home_url() );
-		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
+		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$this->assertEquals(
 			[
 				[ 'title' => 'Home', 'link'  => '' ]
@@ -70,7 +70,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		update_option( 'page_for_posts', $this->blog_page_id );
 
 		$this->go_to( get_permalink( $this->blog_page_id ) );
-		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
+		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$this->assertEquals(
 			[
 				[ 'title' => 'HOME', 'link' => 'http://example.org' ],
@@ -83,7 +83,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 	public function test_category() {
 		$category = get_terms( 'post_tag' )[0];
 		$this->go_to( get_term_link( $category ) );
-		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
+		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$this->assertEquals(
 			[
 				[ 'title' => 'Home', 'link' => 'http://example.org' ],
@@ -96,7 +96,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 	public function test_post_tag() {
 		$post_tag = get_terms( 'post_tag' )[0];
 		$this->go_to( get_term_link( $post_tag ) );
-		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
+		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$this->assertEquals(
 			[
 				[ 'title' => 'Home', 'link' => 'http://example.org' ],
@@ -110,7 +110,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$newest_post = get_post( $this->post_ids[0] );
 		$year = date( 'Y', strtotime( $newest_post->post_date ) );
 		$this->go_to( get_year_link( $year ) );
-		$breadcrumbs     = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
+		$breadcrumbs     = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$breadcrumb_year = new \Inc2734\WP_Breadcrumbs\Controller\Year();
 		$this->assertEquals(
 			[
@@ -126,7 +126,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$year  = date( 'Y', strtotime( $newest_post->post_date ) );
 		$month = date( 'n', strtotime( $newest_post->post_date ) );
 		$this->go_to( get_month_link( $year, $month ) );
-		$breadcrumbs      = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
+		$breadcrumbs      = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$breadcrumb_month = new \Inc2734\WP_Breadcrumbs\Controller\Month();
 		$this->assertEquals(
 			[
@@ -144,7 +144,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$month = date( 'n', strtotime( $newest_post->post_date ) );
 		$day   = date( 'j', strtotime( $newest_post->post_date ) );
 		$this->go_to( get_day_link( $year, $month, $day ) );
-		$breadcrumbs    = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
+		$breadcrumbs    = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$breadcrumb_day = new \Inc2734\WP_Breadcrumbs\Controller\Day();
 		$this->assertEquals(
 			[
@@ -161,7 +161,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$newest_post = get_post( $this->post_ids[0] );
 		$author = $newest_post->post_author;
 		$this->go_to( get_author_posts_url( $author ) );
-		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
+		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$this->assertEquals(
 			[
 				[ 'title' => 'Home', 'link' => 'http://example.org' ],
@@ -176,7 +176,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$newest_post = get_post( $this->post_ids[0] );
 		$categories = get_the_category( $newest_post );
 		$this->go_to( get_permalink( $newest_post ) );
-		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
+		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$this->assertEquals(
 			[
 				[ 'title' => 'Home', 'link' => 'http://example.org' ],
@@ -190,7 +190,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$custom_post_type_id = $this->factory->post->create( [ 'post_type' => $this->post_type ] );
 		$custom_post = get_post( $custom_post_type_id );
 		$this->go_to( get_permalink( $custom_post_type_id ) );
-		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
+		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$post_type_object = get_post_type_object( $custom_post->post_type );
 		$this->assertEquals(
 			[
@@ -206,7 +206,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		// No posts
 		$this->go_to( get_post_type_archive_link( $this->post_type ) );
 		$this->assertFalse( get_post_type() );
-		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
+		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$post_type_object = get_post_type_object( $this->post_type );
 		$this->assertEquals(
 			[
@@ -220,7 +220,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$custom_post_type_id = $this->factory->post->create( [ 'post_type' => $this->post_type ] );
 		$this->go_to( get_post_type_archive_link( $this->post_type ) );
 		$this->assertNotFalse( get_post_type() );
-		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Breadcrumbs();
+		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$post_type_object = get_post_type_object( $this->post_type );
 		$this->assertEquals(
 			[
