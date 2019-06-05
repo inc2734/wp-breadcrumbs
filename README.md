@@ -22,7 +22,7 @@ $items = $breadcrumbs->get();
       <ol class="c-breadcrumbs__list" itemscope itemtype="http://schema.org/BreadcrumbList">
          <?php foreach ( $items as $key => $item ) : ?>
          <li class="c-breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-            <?php if ( $key + 1 === count($items) ) : ?>
+            <?php if ( empty($item['link']) ) : ?>
             <span itemscope itemtype="http://schema.org/Thing" itemprop="item">
                <span itemprop="name"><?php echo esc_html( $item['title'] ); ?></span>
             </span>
@@ -43,16 +43,27 @@ $items = $breadcrumbs->get();
 
 Some filters are available if you need to change `wp-breadcrumbs` behavior.
 
-
 ```php
+/**
+ * Filter items
+ */
 add_filter('inc2734_wp_breadcrumbs', function($items) {
     // Do something here
     return $items;
 });
 ```
 
+```php
+/**
+ * Add link attribute for the last item (default: false)
+ */
+add_filter('inc2734_wp_breadcrumbs_remove_last_link', '__return_true');
+```
 
 ```php
+/**
+ * Change the taxonomy used in the breadcrumb (default: first taxonomy attached)
+ */
 add_filter( 'inc2734_wp_breadcrumbs_main_taxonomy', function( $first_post_type_taxonomy, $taxonomies, $post_type_object) {
     // Logic to set the primary taxonomy of your post type if it has multiple ones
     if( $post_type_object->name === 'product' ) {
