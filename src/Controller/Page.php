@@ -21,6 +21,6 @@ class Page extends Base {
 	 */
 	protected function set_items() {
 		$this->set_ancestors( get_the_ID(), 'page' );
-		$this->set( get_the_title() );
+		$this->set( get_the_title(), get_permalink() );
 	}
 }

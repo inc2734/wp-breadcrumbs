@@ -20,8 +20,8 @@ class Taxonomy extends Base {
 	 * @return void
 	 */
 	protected function set_items() {
-		$taxonomy         = get_query_var( 'taxonomy' );
-		$term             = get_term_by( 'slug', get_query_var( 'term' ), $taxonomy );
+		$term             = get_queried_object();
+		$taxonomy         = $term->taxonomy;
 		$taxonomy_objects = get_taxonomy( $taxonomy );
 		$post_types       = $taxonomy_objects->object_type;
 		$post_type        = array_shift( $post_types );
@@ -30,7 +30,7 @@ class Taxonomy extends Base {
 			$post_type_object = get_post_type_object( $post_type );
 			$label = $post_type_object->label;
 			if ( $post_type_object->has_archive ) {
-				$this->set( $label, $this->get_post_type_archive_link( $post_type ) );
+				$this->set( $label, get_post_type_archive_link( $post_type ) );
 			}
 		}
 
@@ -38,6 +38,6 @@ class Taxonomy extends Base {
 			$this->set_ancestors( $term->term_id, $taxonomy );
 		}
 
-		$this->set( $this->get_the_archive_title() );
+		$this->set( $term->name, get_term_link($term) );
 	}
 }

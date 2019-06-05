@@ -31,17 +31,13 @@ class Bootstrap {
 			[
 				'Not_Found'         => is_404(),
 				'Search'            => is_search(),
-				'Taxonomy'          => is_tax(),
+				'Taxonomy'          => is_tax() || is_category() || is_tag(),
 				'Attachment'        => is_attachment(),
 				'Page'              => is_page() && ! is_front_page(),
 				'Post_Type_Archive' => is_post_type_archive(),
 				'Single'            => is_single(),
-				'Category'          => is_category(),
-				'Tag'               => is_tag(),
 				'Author'            => is_author(),
-				'Day'               => is_day(),
-				'Month'             => is_month(),
-				'Year'              => is_year(),
+				'Date'              => is_date(),
 				'Home'              => is_home() && ! is_front_page(),
 			]
 		);
@@ -90,6 +86,12 @@ class Bootstrap {
 	 * @return array
 	 */
 	public function get() {
+        $remove_link = apply_filters('inc2734_wp_breadcrumbs_remove_last_link', false);
+        foreach ( $this->breadcrumbs as $k => &$item ) {
+			if ( $k + 1 === count($this->breadcrumbs) && $remove_link ) {
+				unset($item['link']);
+			}
+        }
 		return apply_filters( 'inc2734_wp_breadcrumbs', $this->breadcrumbs );
 	}
 }

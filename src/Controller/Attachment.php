@@ -20,6 +20,6 @@ class Attachment extends Base {
 	 * @return void
 	 */
 	protected function set_items() {
-		$this->set( get_the_title() );
+		$this->set( get_the_title(), get_permalink() );
 	}
 }

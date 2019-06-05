@@ -32,7 +32,7 @@ class Single extends Base {
 			$this->set_categories();
 		}
 
-		$this->set( get_the_title() );
+		$this->set( get_the_title(), get_permalink() );
 	}
 
 	/**
@@ -43,7 +43,7 @@ class Single extends Base {
 	 */
 	protected function set_post_type_archive( $post_type_object ) {
 		$label = $post_type_object->label;
-		$this->set( $label, $this->get_post_type_archive_link( $post_type_object->name ) );
+		$this->set( $label, get_post_type_archive_link( $post_type_object->name ) );
 	}
 
 	/**

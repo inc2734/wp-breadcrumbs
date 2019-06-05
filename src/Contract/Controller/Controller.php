@@ -67,28 +67,6 @@ abstract class Controller {
 	}
 
 	/**
-	 * Return custom post type archive page url
-	 *
-	 * @param string $post_type custom post type name
-	 * @return null|string
-	 */
-	protected function get_post_type_archive_link( $post_type ) {
-		$archive_link = get_post_type_archive_link( $post_type );
-		if ( $archive_link ) {
-			return $archive_link;
-		}
-	}
-
-	/**
-	 * Retrieve the archive title based on the queried object.
-	 *
-	 * @return string
-	 */
-	protected function get_the_archive_title() {
-		return preg_replace( '@^[^:]+: (.*)$@', '$1', get_the_archive_title() );
-	}
-
-	/**
 	 * Return the current post type
 	 *
 	 * @return string

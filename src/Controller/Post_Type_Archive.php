@@ -25,6 +25,8 @@ class Post_Type_Archive extends Base {
 			return;
 		}
 
-		$this->set( $this->get_the_archive_title() );
+		$post_type_object = get_post_type_object( $post_type );
+
+		$this->set( $post_type_object->label, get_post_type_archive_link($post_type) );
 	}
 }
