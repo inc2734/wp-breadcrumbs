@@ -72,3 +72,14 @@ add_filter( 'inc2734_wp_breadcrumbs_main_taxonomy', function( $first_post_type_t
     return $first_post_type_taxonomy;
 }, 10, 3);
 ```
+
+```php
+/**
+ * If a post (post, CPT, etc.) has more than one term, this filter provides a way to set the main term
+ */
+add_filter( 'inc2734_wp_breadcrumbs_main_term', function( $main_term, $terms, $taxonomy, $post_id) {
+    // Example with the SEO Framework plugin
+    $tsf_main_term = get_post_meta($post_id, sprintf('_primary_term_%s', $taxonomy), true);
+    return $tsf_main_term ? get_term($tsf_main_term) : $main_term;
+}, 10, 3);
+```
