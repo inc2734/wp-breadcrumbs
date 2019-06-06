@@ -55,9 +55,9 @@ add_filter('inc2734_wp_breadcrumbs', function($items) {
 
 ```php
 /**
- * Add link attribute for the last item (default: false)
+ * Add link attribute for the last item (default: true)
  */
-add_filter('inc2734_wp_breadcrumbs_remove_last_link', '__return_true');
+add_filter('inc2734_wp_breadcrumbs_remove_last_link', '__return_false');
 ```
 
 ```php
