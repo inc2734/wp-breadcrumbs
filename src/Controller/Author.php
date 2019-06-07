@@ -20,6 +20,8 @@ class Author extends Base {
 	 * @return void
 	 */
 	protected function set_items() {
-		$this->set( $this->get_the_archive_title() );
+		$user = get_queried_object();
+		$display_name = get_the_author_meta( 'display_name', $user->ID );
+		$this->set( $display_name, get_author_posts_url( $user->ID ) );
 	}
 }

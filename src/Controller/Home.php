@@ -22,9 +22,10 @@ class Home extends Base {
 	protected function set_items() {
 		$show_on_front  = get_option( 'show_on_front' );
 		$page_for_posts = get_option( 'page_for_posts' );
+
 		if ( 'page' === $show_on_front && $page_for_posts ) {
 			$title = get_the_title( $page_for_posts );
-			$this->set( $title );
+			$this->set( $title, get_permalink( $page_for_posts ) );
 		}
 	}
 }

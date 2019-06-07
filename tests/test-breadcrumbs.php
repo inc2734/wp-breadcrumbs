@@ -15,6 +15,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$this->front_page_id = $this->factory->post->create( [ 'post_type' => 'page', 'post_title' => 'HOME' ] );
 		$this->blog_page_id  = $this->factory->post->create( [ 'post_type' => 'page', 'post_title' => 'BLOG' ] );
 		$this->tag_id        = $this->factory->term->create( array( 'taxonomy' => 'post_tag' ) );
+		$this->category_id   = $this->factory->term->create( array( 'taxonomy' => 'category' ) );
 		$this->post_type     = rand_str( 12 );
 		$this->taxonomy      = rand_str( 12 );
 
@@ -37,10 +38,13 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 
 		foreach( $this->post_ids as $post_id ) {
 			wp_set_object_terms( $post_id, get_term( $this->tag_id, 'post_tag' )->slug, 'post_tag' );
+			wp_set_object_terms( $post_id, get_term( $this->category_id, 'category' )->slug, 'category' );
 		}
 
 		create_initial_taxonomies();
 		$wp_rewrite->flush_rules();
+
+		add_filter( 'inc2734_wp_breadcrumbs_remove_last_link', '__return_false' );
 	}
 
 	public function tearDown() {
@@ -58,7 +62,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$this->assertEquals(
 			[
-				[ 'title' => 'Home', 'link'  => '' ]
+				[ 'title' => 'Home', 'link'  => home_url('/') ]
 			],
 			$breadcrumbs->get()
 		);
@@ -73,21 +77,21 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$this->assertEquals(
 			[
-				[ 'title' => 'HOME', 'link' => 'http://example.org' ],
-				[ 'title' => 'BLOG', 'link' => '' ]
+				[ 'title' => 'HOME', 'link' => 'http://example.org/' ],
+				[ 'title' => 'BLOG', 'link' => get_permalink($this->blog_page_id) ]
 			],
 			$breadcrumbs->get()
 		);
 	}
 
 	public function test_category() {
-		$category = get_terms( 'post_tag' )[0];
+		$category = get_terms( 'category' )[0];
 		$this->go_to( get_term_link( $category ) );
 		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$this->assertEquals(
 			[
-				[ 'title' => 'Home', 'link' => 'http://example.org' ],
-				[ 'title' => $category->name, 'link' => '' ]
+				[ 'title' => 'Home', 'link' => 'http://example.org/' ],
+				[ 'title' => $category->name, 'link' => get_term_link($category) ]
 			],
 			$breadcrumbs->get()
 		);
@@ -99,8 +103,8 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$this->assertEquals(
 			[
-				[ 'title' => 'Home', 'link' => 'http://example.org' ],
-				[ 'title' => $post_tag->name, 'link' => '' ]
+				[ 'title' => 'Home', 'link' => 'http://example.org/' ],
+				[ 'title' => $post_tag->name, 'link' => get_term_link($post_tag) ]
 			],
 			$breadcrumbs->get()
 		);
@@ -111,11 +115,11 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$year = date( 'Y', strtotime( $newest_post->post_date ) );
 		$this->go_to( get_year_link( $year ) );
 		$breadcrumbs     = new \Inc2734\WP_Breadcrumbs\Bootstrap();
-		$breadcrumb_year = new \Inc2734\WP_Breadcrumbs\Controller\Year();
+		$breadcrumb_year = new \Inc2734\WP_Breadcrumbs\Controller\Date();
 		$this->assertEquals(
 			[
-				[ 'title' => 'Home', 'link' => 'http://example.org' ],
-				[ 'title' => $breadcrumb_year->year( $year ), 'link' => '' ]
+				[ 'title' => 'Home', 'link' => 'http://example.org/' ],
+				[ 'title' => $breadcrumb_year->year( $year ), 'link' => get_year_link( $year ) ]
 			],
 			$breadcrumbs->get()
 		);
@@ -127,12 +131,12 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$month = date( 'n', strtotime( $newest_post->post_date ) );
 		$this->go_to( get_month_link( $year, $month ) );
 		$breadcrumbs      = new \Inc2734\WP_Breadcrumbs\Bootstrap();
-		$breadcrumb_month = new \Inc2734\WP_Breadcrumbs\Controller\Month();
+		$breadcrumb_month = new \Inc2734\WP_Breadcrumbs\Controller\Date();
 		$this->assertEquals(
 			[
-				[ 'title' => 'Home', 'link' => 'http://example.org' ],
-				[ 'title' => $breadcrumb_month->year( $year ), 'link' => "http://example.org/$year/" ],
-				[ 'title' => get_the_date( 'F Y' ), 'link' => '' ]
+				[ 'title' => 'Home', 'link' => 'http://example.org/' ],
+				[ 'title' => $year, 'link' => "http://example.org/$year/" ],
+				[ 'title' => trim(single_month_title( ' ', false )), 'link' => get_month_link( $year, $month ) ]
 			],
 			$breadcrumbs->get()
 		);
@@ -145,13 +149,13 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$day   = date( 'j', strtotime( $newest_post->post_date ) );
 		$this->go_to( get_day_link( $year, $month, $day ) );
 		$breadcrumbs    = new \Inc2734\WP_Breadcrumbs\Bootstrap();
-		$breadcrumb_day = new \Inc2734\WP_Breadcrumbs\Controller\Day();
+		$breadcrumb_day = new \Inc2734\WP_Breadcrumbs\Controller\Date();
 		$this->assertEquals(
 			[
-				[ 'title' => 'Home', 'link' => 'http://example.org' ],
+				[ 'title' => 'Home', 'link' => 'http://example.org/' ],
 				[ 'title' => $breadcrumb_day->year( $year ), 'link' => "http://example.org/$year/" ],
-				[ 'title' => $breadcrumb_day->month( $month ), 'link' => "http://example.org/$year/" . sprintf( '%02d', $month ) . "/" ],
-				[ 'title' => get_the_date( 'F j, Y' ), 'link' => '' ]
+				[ 'title' => trim(single_month_title( ' ', false )), 'link' => "http://example.org/$year/" . sprintf( '%02d', $month ) . "/" ],
+				[ 'title' => get_the_date(), 'link' => get_day_link( $year, $month, $day ) ]
 			],
 			$breadcrumbs->get()
 		);
@@ -164,8 +168,8 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$this->assertEquals(
 			[
-				[ 'title' => 'Home', 'link' => 'http://example.org' ],
-				[ 'title' => '<span class="vcard">' . get_the_author_meta( 'user_login', $this->author ) . '</span>', 'link' => '' ],
+				[ 'title' => 'Home', 'link' => 'http://example.org/' ],
+				[ 'title' => get_the_author_meta( 'user_login', $this->author ), 'link' => get_author_posts_url($newest_post->post_author) ],
 			],
 			$breadcrumbs->get()
 		);
@@ -179,9 +183,9 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$this->assertEquals(
 			[
-				[ 'title' => 'Home', 'link' => 'http://example.org' ],
+				[ 'title' => 'Home', 'link' => 'http://example.org/' ],
 				[ 'title' => $categories[0]->name, 'link' => get_term_link( $categories[0] ) ],
-				[ 'title' => get_the_title( $newest_post ), 'link' => '' ],
+				[ 'title' => get_the_title( $newest_post ), 'link' => get_permalink($this->post_ids[0]) ],
 			],
 			$breadcrumbs->get()
 		);
@@ -194,9 +198,9 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$post_type_object = get_post_type_object( $custom_post->post_type );
 		$this->assertEquals(
 			[
-				[ 'title' => 'Home', 'link' => 'http://example.org' ],
+				[ 'title' => 'Home', 'link' => 'http://example.org/' ],
 				[ 'title' => $post_type_object->label, 'link' => get_post_type_archive_link( $custom_post->post_type ) ],
-				[ 'title' => get_the_title( $custom_post_type_id ), 'link' => '' ],
+				[ 'title' => get_the_title( $custom_post_type_id ), 'link' => get_permalink($custom_post->ID) ],
 			],
 			$breadcrumbs->get()
 		);
@@ -210,8 +214,8 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$post_type_object = get_post_type_object( $this->post_type );
 		$this->assertEquals(
 			[
-				[ 'title' => 'Home', 'link' => 'http://example.org' ],
-				[ 'title' => $post_type_object->label, 'link' => '' ],
+				[ 'title' => 'Home', 'link' => 'http://example.org/' ],
+				[ 'title' => $post_type_object->label, 'link' => get_post_type_archive_link($this->post_type) ],
 			],
 			$breadcrumbs->get()
 		);
@@ -224,8 +228,8 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$post_type_object = get_post_type_object( $this->post_type );
 		$this->assertEquals(
 			[
-				[ 'title' => 'Home', 'link' => 'http://example.org' ],
-				[ 'title' => $post_type_object->label, 'link' => '' ],
+				[ 'title' => 'Home', 'link' => 'http://example.org/' ],
+				[ 'title' => $post_type_object->label, 'link' => get_post_type_archive_link($this->post_type) ],
 			],
 			$breadcrumbs->get()
 		);

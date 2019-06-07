@@ -32,7 +32,7 @@ class Single extends Base {
 			$this->set_categories();
 		}
 
-		$this->set( get_the_title() );
+		$this->set( get_the_title(), get_permalink() );
 	}
 
 	/**
@@ -43,7 +43,7 @@ class Single extends Base {
 	 */
 	protected function set_post_type_archive( $post_type_object ) {
 		$label = $post_type_object->label;
-		$this->set( $label, $this->get_post_type_archive_link( $post_type_object->name ) );
+		$this->set( $label, get_post_type_archive_link( $post_type_object->name ) );
 	}
 
 	/**
@@ -65,9 +65,14 @@ class Single extends Base {
 			return;
 		}
 
-		$term = array_shift( $terms );
-		$this->set_ancestors( $term->term_id, $taxonomy );
-		$this->set( $term->name, get_term_link( $term ) );
+		if ( count( $terms ) > 1 ) {
+			$main_term = apply_filters( 'inc2734_wp_breadcrumbs_main_term', array_shift( $terms ), $terms, $taxonomy, get_the_ID() );
+		} else {
+			$main_term = $terms[0];
+		}
+
+		$this->set_ancestors( $main_term->term_id, $taxonomy );
+		$this->set( $main_term->name, get_term_link( $main_term ) );
 	}
 
 	/**
@@ -77,10 +82,15 @@ class Single extends Base {
 	 */
 	protected function set_categories() {
 		$categories = get_the_category( get_the_ID() );
+
 		if ( $categories ) {
-			$category = array_shift( $categories );
-			$this->set_ancestors( $category->term_id, 'category' );
-			$this->set( $category->name, get_term_link( $category ) );
+			if ( count( $categories ) > 1 ) {
+				$main_category = apply_filters( 'inc2734_wp_breadcrumbs_main_term', array_shift( $categories ), $categories, 'category', get_the_ID() );
+			} else {
+				$main_category = $categories[0];
+			}
+			$this->set_ancestors( $main_category->term_id, 'category' );
+			$this->set( $main_category->name, get_term_link( $main_category ) );
 		}
 	}
 }

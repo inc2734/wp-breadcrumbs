@@ -41,6 +41,8 @@ class BreadcrumbsTestNoarchive extends WP_UnitTestCase {
 
 		create_initial_taxonomies();
 		$wp_rewrite->flush_rules();
+
+		add_filter( 'inc2734_wp_breadcrumbs_remove_last_link', '__return_false' );
 	}
 
 	public function tearDown() {
@@ -61,9 +63,9 @@ class BreadcrumbsTestNoarchive extends WP_UnitTestCase {
 		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$this->assertEquals(
 			[
-				[ 'title' => 'Home', 'link' => 'http://example.org' ],
+				[ 'title' => 'Home', 'link' => 'http://example.org/' ],
 				[ 'title' => $categories[0]->name, 'link' => get_term_link( $categories[0] ) ],
-				[ 'title' => get_the_title( $newest_post ), 'link' => '' ],
+				[ 'title' => get_the_title( $newest_post ), 'link' => get_permalink($this->post_ids[0]) ],
 			],
 			$breadcrumbs->get()
 		);
@@ -76,8 +78,8 @@ class BreadcrumbsTestNoarchive extends WP_UnitTestCase {
 		$post_type_object = get_post_type_object( $custom_post->post_type );
 		$this->assertEquals(
 			[
-				[ 'title' => 'Home', 'link' => 'http://example.org' ],
-				[ 'title' => get_the_title( $custom_post_type_id ), 'link' => '' ],
+				[ 'title' => 'Home', 'link' => 'http://example.org/' ],
+				[ 'title' => get_the_title( $custom_post_type_id ), 'link' => get_permalink($custom_post_type_id) ],
 			],
 			$breadcrumbs->get()
 		);
