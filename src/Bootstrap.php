@@ -86,12 +86,12 @@ class Bootstrap {
 	 * @return array
 	 */
 	public function get() {
-        $remove_link = apply_filters('inc2734_wp_breadcrumbs_remove_last_link', true);
-        foreach ( $this->breadcrumbs as $k => &$item ) {
-			if ( $k + 1 === count($this->breadcrumbs) && $remove_link ) {
-				unset($item['link']);
+		$remove_link = apply_filters( 'inc2734_wp_breadcrumbs_remove_last_link', true );
+		foreach ( $this->breadcrumbs as $k => &$item ) {
+			if ( count( $this->breadcrumbs ) === $k + 1 && $remove_link ) {
+				unset( $item['link'] );
 			}
-        }
+		}
 		return apply_filters( 'inc2734_wp_breadcrumbs', $this->breadcrumbs );
 	}
 }

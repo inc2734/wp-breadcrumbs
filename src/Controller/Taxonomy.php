@@ -38,6 +38,6 @@ class Taxonomy extends Base {
 			$this->set_ancestors( $term->term_id, $taxonomy );
 		}
 
-		$this->set( $term->name, get_term_link($term) );
+		$this->set( $term->name, get_term_link( $term ) );
 	}
 }

@@ -21,7 +21,7 @@ class Front_Page extends Base {
 	 */
 	protected function set_items() {
 		$home_label = $this->get_home_label();
-		$this->set( $home_label, home_url('/') );
+		$this->set( $home_label, home_url( '/' ) );
 	}
 
 	/**

@@ -41,6 +41,8 @@ class BreadcrumbsTestNoarchive extends WP_UnitTestCase {
 
 		create_initial_taxonomies();
 		$wp_rewrite->flush_rules();
+
+		add_filter( 'inc2734_wp_breadcrumbs_remove_last_link', '__return_false' );
 	}
 
 	public function tearDown() {

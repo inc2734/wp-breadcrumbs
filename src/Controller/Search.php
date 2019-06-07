@@ -22,6 +22,7 @@ class Search extends Base {
 	protected function set_items() {
 		$this->set(
 			sprintf(
+				/* translators: %1$s: Search query */
 				__( 'Search results of "%1$s"', 'inc2734-wp-breadcrumbs' ),
 				get_search_query()
 			)
