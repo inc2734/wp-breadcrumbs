@@ -24,11 +24,25 @@ class Date extends Base {
 		$month = get_query_var( 'monthnum' );
 		$day   = get_query_var( 'day' );
 
-		$this->set( $year, get_year_link( $year ) );
-
-		if ( is_month() || is_day() ) {
-			$this->set( trim( single_month_title( ' ', false ) ), get_month_link( $year, $month ) );
+		if ( is_year() ) {
+			$title = preg_replace( '|^[^:]*:|', '', get_the_archive_title() );
+			$this->set( trim( $title ), get_year_link( $year ) );
+			return;
 		}
+
+		// phpcs:disable WordPress.WP.I18n.MissingArgDomain
+		$this->set( get_the_date( _x( 'Y', 'yearly archives date format' ) ), get_year_link( $year ) );
+		// phpcs:enable
+
+		if ( is_month() ) {
+			$title = preg_replace( '|^[^:]*:|', '', get_the_archive_title() );
+			$this->set( trim( $title ), get_month_link( $year, $month ) );
+			return;
+		}
+
+		// phpcs:disable WordPress.WP.I18n.MissingArgDomain
+		$this->set( get_the_date( _x( 'F', 'monthly archives date format' ) ), get_month_link( $year, $month ) );
+		// phpcs:enable
 
 		if ( is_day() ) {
 			$this->set( get_the_date(), get_day_link( $year, $month, $day ) );

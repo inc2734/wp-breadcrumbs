@@ -154,7 +154,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 			[
 				[ 'title' => 'Home', 'link' => 'http://example.org/' ],
 				[ 'title' => $breadcrumb_day->year( $year ), 'link' => "http://example.org/$year/" ],
-				[ 'title' => trim(single_month_title( ' ', false )), 'link' => "http://example.org/$year/" . sprintf( '%02d', $month ) . "/" ],
+				[ 'title' => get_the_date( _x( 'F', 'monthly archives date format' ) ), 'link' => "http://example.org/$year/" . sprintf( '%02d', $month ) . "/" ],
 				[ 'title' => get_the_date(), 'link' => get_day_link( $year, $month, $day ) ]
 			],
 			$breadcrumbs->get()
