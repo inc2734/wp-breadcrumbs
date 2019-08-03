@@ -32,6 +32,10 @@ class Single extends Base {
 			$this->set_categories();
 		}
 
+		if ( $post_type_object->hierarchical ) {
+			$this->set_ancestors( get_the_ID(), $post_type );
+		}
+
 		$this->set( get_the_title(), get_permalink() );
 	}
 

@@ -54,7 +54,15 @@ abstract class Controller {
 	protected function set_ancestors( $object_id, $object_type ) {
 		$ancestors = get_ancestors( $object_id, $object_type );
 		krsort( $ancestors );
-		if ( 'page' === $object_type ) {
+
+		$post_types = get_post_types(
+			[
+				'hierarchical' => true,
+				'public'       => true,
+			]
+		);
+
+		if ( in_array( $object_type, $post_types ) ) {
 			foreach ( $ancestors as $ancestor_id ) {
 				$this->set( get_the_title( $ancestor_id ), get_permalink( $ancestor_id ) );
 			}
