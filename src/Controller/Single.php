@@ -41,7 +41,6 @@ class Single extends Base {
 	 * Sets Breadcrumbs items of post type archive
 	 *
 	 * @param object $post_type_object
-	 *
 	 * @return void
 	 */
 	protected function set_post_type_archive( $post_type_object ) {
@@ -53,7 +52,6 @@ class Single extends Base {
 	 * Sets Breadcrumbs items of terms
 	 *
 	 * @param object $post_type_object
-	 *
 	 * @return void
 	 */
 	protected function set_terms( $post_type_object ) {
