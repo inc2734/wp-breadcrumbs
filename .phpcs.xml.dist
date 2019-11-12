@@ -34,4 +34,13 @@
 			<property name="text_domain" type="array" value="inc2734-wp-breadcrumbs"/>
 		</properties>
 	</rule>
+	<rule ref="WordPress.WhiteSpace.ControlStructureSpacing">
+		<properties>
+			<property name="blank_line_check" value="true"/>
+		</properties>
+	</rule>
+	<rule ref="WordPress-Extra">
+		<exclude name="WordPress.Files.FileName" />
+    <exclude name="Generic.Arrays.DisallowShortArraySyntax.Found" />
+	</rule>
 </ruleset>
