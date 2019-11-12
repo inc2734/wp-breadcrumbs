@@ -24,9 +24,6 @@ class Single extends Base {
 		$post_type_object = get_post_type_object( $post_type );
 
 		if ( $post_type ) {
-			if ( $post_type_object->has_archive ) {
-				$this->set_post_type_archive( $post_type_object );
-			}
 			$this->set_terms( $post_type_object );
 		}
 
@@ -35,17 +32,6 @@ class Single extends Base {
 		}
 
 		$this->set( get_the_title(), get_permalink() );
-	}
-
-	/**
-	 * Sets Breadcrumbs items of post type archive
-	 *
-	 * @param object $post_type_object
-	 * @return void
-	 */
-	protected function set_post_type_archive( $post_type_object ) {
-		$label = $post_type_object->label;
-		$this->set( $label, get_post_type_archive_link( $post_type_object->name ) );
 	}
 
 	/**

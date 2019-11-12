@@ -18,27 +18,37 @@ class Bootstrap {
 	 */
 	protected $breadcrumbs = [];
 
+	/**
+	 * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+	 */
 	public function __construct() {
 		load_textdomain( 'inc2734-wp-breadcrumbs', __DIR__ . '/languages/' . get_locale() . '.mo' );
 
 		$breadcrumb = new Controller\Front_Page();
 		$this->_set_items( $breadcrumb->get() );
 
-		$breadcrumb = new Controller\Blog();
-		$this->_set_items( $breadcrumb->get() );
+		$post_type = $this->get_post_type();
+		$post_type_object = get_post_type_object( $post_type );
+
+		if ( 'post' === $post_type ) {
+			$breadcrumb = new Controller\Blog();
+			$this->_set_items( $breadcrumb->get() );
+		} elseif ( $post_type && ! empty( $post_type_object->has_archive ) ) {
+			$breadcrumb = new Controller\Post_Type_Archive();
+			$this->_set_items( $breadcrumb->get() );
+		}
 
 		$controllers = array_filter(
 			[
-				'Not_Found'         => is_404(),
-				'Search'            => is_search(),
-				'Taxonomy'          => is_tax() || is_category() || is_tag(),
-				'Attachment'        => is_attachment(),
-				'Page'              => is_page() && ! is_front_page(),
-				'Post_Type_Archive' => is_post_type_archive(),
-				'Single'            => is_single(),
-				'Author'            => is_author(),
-				'Date'              => is_date(),
-				'Home'              => is_home() && ! is_front_page(),
+				'Not_Found'  => is_404(),
+				'Search'     => is_search(),
+				'Taxonomy'   => is_tax() || is_category() || is_tag(),
+				'Attachment' => is_attachment(),
+				'Page'       => is_page() && ! is_front_page(),
+				'Single'     => is_single(),
+				'Author'     => is_author(),
+				'Date'       => is_date(),
+				'Home'       => is_home() && ! is_front_page(),
 			]
 		);
 
@@ -78,6 +88,27 @@ class Bootstrap {
 			'title' => $title,
 			'link'  => $link,
 		];
+	}
+
+	/**
+	 * Return the current post type
+	 *
+	 * @return string
+	 */
+	protected function get_post_type() {
+		global $wp_query;
+
+		$post_type = get_post_type();
+
+		if ( $post_type ) {
+			return $post_type;
+		}
+
+		if ( isset( $wp_query->query['post_type'] ) ) {
+			return $wp_query->query['post_type'];
+		}
+
+		return $post_type;
 	}
 
 	/**

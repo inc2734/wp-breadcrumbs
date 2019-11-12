@@ -26,6 +26,9 @@ class Post_Type_Archive extends Base {
 		}
 
 		$post_type_object = get_post_type_object( $post_type );
+		if ( ! $post_type_object->has_archive ) {
+			return;
+		}
 
 		$this->set( $post_type_object->label, get_post_type_archive_link( $post_type ) );
 	}
