@@ -118,7 +118,7 @@ class Bootstrap {
 	 */
 	public function get() {
 		$remove_link = apply_filters( 'inc2734_wp_breadcrumbs_remove_last_link', true );
-		foreach ( $this->breadcrumbs as $k => &$item ) {
+		foreach ( $this->breadcrumbs as $k => $item ) {
 			if ( count( $this->breadcrumbs ) === $k + 1 && $remove_link ) {
 				unset( $item['link'] );
 			}
