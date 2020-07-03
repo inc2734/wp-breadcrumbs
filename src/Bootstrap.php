@@ -27,7 +27,9 @@ class Bootstrap {
 		$breadcrumb = new Controller\Front_Page();
 		$this->_set_items( $breadcrumb->get() );
 
-		$post_type = $this->get_post_type();
+		global $wp_query;
+
+		$post_type = $wp_query->get( 'post_type' );
 		$post_type_object = get_post_type_object( $post_type );
 
 		if ( 'post' === $post_type ) {
