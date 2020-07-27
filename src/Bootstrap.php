@@ -32,7 +32,7 @@ class Bootstrap {
 		$post_type = $wp_query->get( 'post_type' );
 		$post_type_object = get_post_type_object( $post_type );
 
-		if ( 'post' === $post_type ) {
+		if ( 'post' === $post_type || '' === $post_type ) {
 			$breadcrumb = new Controller\Blog();
 			$this->_set_items( $breadcrumb->get() );
 		} elseif ( $post_type && ! empty( $post_type_object->has_archive ) ) {
