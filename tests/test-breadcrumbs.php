@@ -23,14 +23,14 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 			$this->post_type,
 			[
 				'public'      => true ,
-				'taxonomies'  => ['category'],
+				'taxonomies'  => [ 'category' ],
 				'has_archive' => true
 			]
 		);
 
 		register_taxonomy(
 			$this->taxonomy,
-			$this->post_type,
+			[ $this->post_type ],
 			[
 				'public' => true,
 			]
@@ -230,6 +230,21 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 			[
 				[ 'title' => 'Home', 'link' => 'http://example.org/' ],
 				[ 'title' => $post_type_object->label, 'link' => get_post_type_archive_link($this->post_type) ],
+			],
+			$breadcrumbs->get()
+		);
+	}
+
+	public function test_taxonomy() {
+		$term = get_terms( $this->taxonomy )[0];
+		$post_type = get_post_type_object( $this->post_type );
+		$this->go_to( get_term_link( $term ) );
+		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Bootstrap();
+		$this->assertEquals(
+			[
+				[ 'title' => 'Home', 'link' => 'http://example.org/' ],
+				[ 'title' => $post_type->label, 'link' => get_post_type_archive( $this->post_type ) ],
+				[ 'title' => $term->name, 'link' => get_term_link( $term ) ],
 			],
 			$breadcrumbs->get()
 		);
