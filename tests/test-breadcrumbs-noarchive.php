@@ -63,7 +63,7 @@ class BreadcrumbsTestNoarchive extends WP_UnitTestCase {
 		$breadcrumbs = new \Inc2734\WP_Breadcrumbs\Bootstrap();
 		$this->assertEquals(
 			[
-				[ 'title' => 'Home', 'link' => 'http://example.org/' ],
+				[ 'title' => 'Home', 'link' => 'http://localhost:8889/' ],
 				[ 'title' => $categories[0]->name, 'link' => get_term_link( $categories[0] ) ],
 				[ 'title' => get_the_title( $newest_post ), 'link' => get_permalink($this->post_ids[0]) ],
 			],
@@ -78,7 +78,7 @@ class BreadcrumbsTestNoarchive extends WP_UnitTestCase {
 		$post_type_object = get_post_type_object( $custom_post->post_type );
 		$this->assertEquals(
 			[
-				[ 'title' => 'Home', 'link' => 'http://example.org/' ],
+				[ 'title' => 'Home', 'link' => 'http://localhost:8889/' ],
 				[ 'title' => get_the_title( $custom_post_type_id ), 'link' => get_permalink($custom_post_type_id) ],
 			],
 			$breadcrumbs->get()

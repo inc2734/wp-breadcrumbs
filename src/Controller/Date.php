@@ -49,24 +49,42 @@ class Date extends Base {
 		}
 	}
 
+	/**
+	 * Return year archive url.
+	 *
+	 * @param int $year Year.
+	 */
 	protected function get_year_link( $year ) {
 		$post_type = $this->get_post_type();
-		$url = get_year_link( $year );
-		$url = ( 'post' !== $post_type ) ? add_query_arg( 'post_type', $post_type, $url ) : $url;
+		$url       = get_year_link( $year );
+		$url       = ( 'post' !== $post_type ) ? add_query_arg( 'post_type', $post_type, $url ) : $url;
 		return $url;
 	}
 
+	/**
+	 * Return month archive url.
+	 *
+	 * @param int $year Year.
+	 * @param int $month Month.
+	 */
 	protected function get_month_link( $year, $month ) {
 		$post_type = $this->get_post_type();
-		$url = get_month_link( $year, $month );
-		$url = ( 'post' !== $post_type ) ? add_query_arg( 'post_type', $post_type, $url ) : $url;
+		$url       = get_month_link( $year, $month );
+		$url       = ( 'post' !== $post_type ) ? add_query_arg( 'post_type', $post_type, $url ) : $url;
 		return $url;
 	}
 
+	/**
+	 * Return day archive url.
+	 *
+	 * @param int $year Year.
+	 * @param int $month Month.
+	 * @param int $day Day.
+	 */
 	protected function get_day_link( $year, $month, $day ) {
 		$post_type = $this->get_post_type();
-		$url = get_day_link( $year, $month, $day );
-		$url = ( 'post' !== $post_type ) ? add_query_arg( 'post_type', $post_type, $url ) : $url;
+		$url       = get_day_link( $year, $month, $day );
+		$url       = ( 'post' !== $post_type ) ? add_query_arg( 'post_type', $post_type, $url ) : $url;
 		return $url;
 	}
 }

@@ -19,7 +19,7 @@ class Bootstrap {
 	protected $breadcrumbs = [];
 
 	/**
-	 * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+	 * Constructor
 	 */
 	public function __construct() {
 		load_textdomain( 'inc2734-wp-breadcrumbs', __DIR__ . '/languages/' . get_locale() . '.mo' );
@@ -29,11 +29,15 @@ class Bootstrap {
 
 		global $wp_query;
 
-		$post_type = $wp_query->get( 'post_type' );
+		$post_type        = $wp_query->get( 'post_type' );
+		$post_type        = $this->get_post_type();
 		$post_type_object = get_post_type_object( $post_type );
 
-		if ( 'post' === $post_type || '' === $post_type ) {
+		if ( 'post' === $post_type || ( '' === $post_type && ! is_tax() ) ) {
 			$breadcrumb = new Controller\Blog();
+			$this->_set_items( $breadcrumb->get() );
+		} elseif ( is_tax() ) {
+			$breadcrumb = new Controller\Post_Type_Archive();
 			$this->_set_items( $breadcrumb->get() );
 		} elseif ( $post_type && ! empty( $post_type_object->has_archive ) ) {
 			$breadcrumb = new Controller\Post_Type_Archive();
@@ -68,9 +72,9 @@ class Bootstrap {
 	}
 
 	/**
-	 * Sets breadcrumbs items
+	 * Sets breadcrumbs items.
 	 *
-	 * @param array $items
+	 * @param array $items Array of items.
 	 * @return void
 	 */
 	protected function _set_items( $items ) {
@@ -80,10 +84,10 @@ class Bootstrap {
 	}
 
 	/**
-	 * Adds a item
+	 * Adds a item.
 	 *
-	 * @param string $title
-	 * @param string $link
+	 * @param string $title Title.
+	 * @param string $link  Link url.
 	 */
 	protected function _set( $title, $link = '' ) {
 		$this->breadcrumbs[] = [
@@ -93,7 +97,7 @@ class Bootstrap {
 	}
 
 	/**
-	 * Return the current post type
+	 * Return the current post type.
 	 *
 	 * @return string
 	 */

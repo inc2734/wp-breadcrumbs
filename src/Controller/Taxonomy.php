@@ -8,6 +8,7 @@
 namespace Inc2734\WP_Breadcrumbs\Controller;
 
 use Inc2734\WP_Breadcrumbs\Contract\Controller\Controller as Base;
+use Inc2734\WP_Breadcrumbs\Controller;
 
 /**
  * Taxonomy item of breadcrumbs
@@ -22,12 +23,6 @@ class Taxonomy extends Base {
 	protected function set_items() {
 		$term     = get_queried_object();
 		$taxonomy = get_taxonomy( $term->taxonomy );
-
-		if ( ! empty( $taxonomy->object_type ) ) {
-			$post_type = $taxonomy->object_type[0];
-			$post_type_object = get_post_type_object( $post_type );
-			$this->set( $post_type_object->label, get_post_type_archive_link( $post_type ) );
-		}
 
 		if ( ! empty( $taxonomy->name ) ) {
 			if ( is_taxonomy_hierarchical( $taxonomy->name ) && $term->parent ) {

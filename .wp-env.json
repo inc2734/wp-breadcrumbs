@@ -1,0 +1,9 @@
+{
+  "core": null,
+  "mappings": {
+    "wp-content/plugins/wp-breadcrumbs": "./"
+  },
+  "config": {
+    "WP_DEBUG": true
+  }
+}

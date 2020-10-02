@@ -25,13 +25,13 @@ class Front_Page extends Base {
 	}
 
 	/**
-	 * Return front page label
+	 * Return front page label.
 	 *
 	 * @return string
 	 */
 	protected function get_home_label() {
 		$page_on_front = get_option( 'page_on_front' );
-		$home_label = __( 'Home', 'inc2734-wp-breadcrumbs' );
+		$home_label    = __( 'Home', 'inc2734-wp-breadcrumbs' );
 		if ( $page_on_front ) {
 			$home_label = get_the_title( $page_on_front );
 		}

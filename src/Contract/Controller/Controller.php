@@ -15,28 +15,31 @@ namespace Inc2734\WP_Breadcrumbs\Contract\Controller;
 abstract class Controller {
 
 	/**
-	 * Store each item of breadcrumbs in ascending order
+	 * Store each item of breadcrumbs in ascending order.
 	 *
 	 * @var array
 	 */
 	protected $breadcrumbs = [];
 
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
 		$this->set_items();
 	}
 
 	/**
-	 * Sets breadcrumbs items
+	 * Sets breadcrumbs items.
 	 *
 	 * @return void
 	 */
 	abstract protected function set_items();
 
 	/**
-	 * Adds a item
+	 * Adds a item.
 	 *
-	 * @param string $title
-	 * @param string $link
+	 * @param string $title Title.
+	 * @param string $link  Link url.
 	 */
 	protected function set( $title, $link = '' ) {
 		$this->breadcrumbs[] = [
@@ -46,10 +49,10 @@ abstract class Controller {
 	}
 
 	/**
-	 * Set the ancestors of the specified page or taxonomy
+	 * Set the ancestors of the specified page or taxonomy.
 	 *
-	 * @param int $object_id Post ID or Term ID
-	 * @param string $object_type
+	 * @param int    $object_id   Post ID or Term ID.
+	 * @param string $object_type Related post type.
 	 */
 	protected function set_ancestors( $object_id, $object_type ) {
 		$ancestors = get_ancestors( $object_id, $object_type );
@@ -62,7 +65,7 @@ abstract class Controller {
 			]
 		);
 
-		if ( in_array( $object_type, $post_types ) ) {
+		if ( in_array( $object_type, $post_types, true ) ) {
 			foreach ( $ancestors as $ancestor_id ) {
 				$this->set( get_the_title( $ancestor_id ), get_permalink( $ancestor_id ) );
 			}
@@ -75,7 +78,7 @@ abstract class Controller {
 	}
 
 	/**
-	 * Return the current post type
+	 * Return the current post type.
 	 *
 	 * @return string
 	 */
@@ -96,9 +99,9 @@ abstract class Controller {
 	}
 
 	/**
-	 * Return year label
+	 * Return year label.
 	 *
-	 * @param string $year
+	 * @param int $year Year.
 	 * @return string
 	 */
 	public function year( $year ) {
@@ -109,9 +112,9 @@ abstract class Controller {
 	}
 
 	/**
-	 * Return month label
+	 * Return month label.
 	 *
-	 * @param string $month
+	 * @param int $month Month.
 	 * @return string
 	 */
 	public function month( $month ) {
@@ -132,15 +135,15 @@ abstract class Controller {
 				11 => 'November',
 				12 => 'December',
 			];
-			$month = $monthes[ $month ];
+			$month   = $monthes[ $month ];
 		}
 		return $month;
 	}
 
 	/**
-	 * Return day label
+	 * Return day label.
 	 *
-	 * @param string $day
+	 * @param int $day Day.
 	 * @return string
 	 */
 	public function day( $day ) {

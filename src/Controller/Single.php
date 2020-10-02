@@ -35,9 +35,9 @@ class Single extends Base {
 	}
 
 	/**
-	 * Sets Breadcrumbs items of terms
+	 * Sets Breadcrumbs items of terms.
 	 *
-	 * @param object $post_type_object
+	 * @param object $post_type_object The post type object.
 	 * @return void
 	 */
 	protected function set_terms( $post_type_object ) {
