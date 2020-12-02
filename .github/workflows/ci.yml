@@ -41,8 +41,5 @@ jobs:
     - name: Npm install
       run: npm install
 
-    - name: Npm build
-      run: npm run build
-
     - name: Running the tests
       run: npm run test
