@@ -1,10 +1,4 @@
 <?php
-/**
- * PHPUnit bootstrap file
- *
- * @package Snow Monkey Blocks
- */
-
 // Require composer dependencies.
 require_once dirname( dirname( __FILE__ ) ) . '/vendor/autoload.php';
 
