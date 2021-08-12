@@ -27,9 +27,6 @@ class Bootstrap {
 		$breadcrumb = new Controller\Front_Page();
 		$this->_set_items( $breadcrumb->get() );
 
-		global $wp_query;
-
-		$post_type        = $wp_query->get( 'post_type' );
 		$post_type        = $this->get_post_type();
 		$post_type_object = get_post_type_object( $post_type );
 
@@ -102,16 +99,25 @@ class Bootstrap {
 	 * @return string
 	 */
 	protected function get_post_type() {
-		global $wp_query;
-
 		$post_type = get_post_type();
-
 		if ( $post_type ) {
 			return $post_type;
 		}
 
-		if ( isset( $wp_query->query['post_type'] ) ) {
-			return $wp_query->query['post_type'];
+		if ( is_category() ) {
+			$taxonomy_object = get_taxonomy( 'category' );
+			return $taxonomy_object->object_type[0];
+		} elseif ( is_tag() ) {
+			$taxonomy_object = get_taxonomy( 'post_tag' );
+			return $taxonomy_object->object_type[0];
+		} elseif ( is_tax() ) {
+			$term            = get_query_var( 'taxonomy' );
+			$taxonomy_object = get_taxonomy( $term );
+			return $taxonomy_object->object_type[0];
+		} elseif ( is_archive() ) {
+			return get_query_var( 'post_type' );
+		} elseif ( is_home() ) {
+			return 'post';
 		}
 
 		return $post_type;

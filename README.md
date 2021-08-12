@@ -1,6 +1,6 @@
 # WP Breadcrumbs
 
-[![Build Status](https://travis-ci.org/inc2734/wp-breadcrumbs.svg?branch=master)](https://travis-ci.org/inc2734/wp-breadcrumbs)
+![CI](https://github.com/inc2734/wp-breadcrumbs/workflows/CI/badge.svg)
 [![Latest Stable Version](https://poser.pugx.org/inc2734/wp-breadcrumbs/v/stable)](https://packagist.org/packages/inc2734/wp-breadcrumbs)
 [![License](https://poser.pugx.org/inc2734/wp-breadcrumbs/license)](https://packagist.org/packages/inc2734/wp-breadcrumbs)
 
