@@ -1,7 +1,9 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
-class BreadcrumbsTest extends WP_UnitTestCase {
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
+
+class BreadcrumbsTest extends TestCase {
 
 	public function setup() {
 		global $wp_rewrite;
