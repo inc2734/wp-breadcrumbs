@@ -20,12 +20,13 @@ class Search extends Base {
 	 * @return void
 	 */
 	protected function set_items() {
-		$this->set(
-			sprintf(
-				/* translators: %1$s: Search query */
+		$title = get_search_query()
+			? sprintf(
+					/* translators: %1$s: Search query */
 				__( 'Search results of "%1$s"', 'inc2734-wp-breadcrumbs' ),
 				get_search_query()
 			)
-		);
+			: __( 'Search results', 'inc2734-wp-breadcrumbs' );
+		$this->set( $title );
 	}
 }

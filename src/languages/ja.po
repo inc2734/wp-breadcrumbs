@@ -4,27 +4,42 @@ msgid ""
 msgstr ""
 "Project-Id-Version: inc2734-wp-breadcrumbs\n"
 "Report-Msgid-Bugs-To: https://make.wordpress.org/polyglots/\n"
-"POT-Creation-Date: 2017-07-21 09:48+0900\n"
+"POT-Creation-Date: 2021-11-16 00:51:13+00:00\n"
+"PO-Revision-Date: 2021-11-16 09:52+0900\n"
+"Last-Translator: inc2734 <inc@2inc.org>\n"
+"Language-Team: Takashi Kitajima <inc@2inc.org>\n"
+"Language: ja_JP\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-07-21 09:49+0900\n"
-"Language-Team: Takashi Kitajima <inc@2inc.org>\n"
-"X-Generator: Poedit 1.8.4\n"
-"Last-Translator: inc2734 <inc@2inc.org>\n"
+"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: ja_JP\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: app/controller/front-page.php:26
+#: Controller/Date.php:34
+msgctxt "yearly archives date format"
+msgid "Y"
+msgstr "Y"
+
+#: Controller/Date.php:44
+msgctxt "monthly archives date format"
+msgid "F"
+msgstr "F"
+
+#: Controller/Front_Page.php:34
 msgid "Home"
 msgstr "ホーム"
 
-#: app/controller/not-found.php:10
+#: Controller/Not_Found.php:23
 msgid "Page not found"
 msgstr "ページが見つかりませんでした"
 
-#: app/controller/search.php:12
+#. translators: %1$s: Search query
+#: Controller/Search.php:26
 msgid "Search results of \"%1$s\""
 msgstr "「%1$s」の検索結果"
+
+#: Controller/Search.php:29
+msgid "Search results"
+msgstr "検索結果"
