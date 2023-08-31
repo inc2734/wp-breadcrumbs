@@ -46,18 +46,26 @@ class Single extends Base {
 			return;
 		}
 
-		$taxonomy = apply_filters( 'inc2734_wp_breadcrumbs_main_taxonomy', array_shift( $taxonomies ), $taxonomies, $post_type_object );
-		$terms    = get_the_terms( get_the_ID(), $taxonomy );
+		$main_taxonomy = null;
+		$main_term     = null;
 
+		foreach ( $taxonomies as $taxonomy ) {
+			$terms = get_the_terms( get_the_ID(), $taxonomy );
+			if ( ! $terms ) {
+				continue;
+			}
+
+			$main_taxonomy = $taxonomy;
+			break;
+		}
+
+		$main_taxonomy = apply_filters( 'inc2734_wp_breadcrumbs_main_taxonomy', $main_taxonomy, $taxonomies, $post_type_object );
+		$terms         = get_the_terms( get_the_ID(), $main_taxonomy );
 		if ( ! $terms ) {
 			return;
 		}
 
-		if ( count( $terms ) > 1 ) {
-			$main_term = apply_filters( 'inc2734_wp_breadcrumbs_main_term', array_shift( $terms ), $terms, $taxonomy, get_the_ID() );
-		} else {
-			$main_term = $terms[0];
-		}
+		$main_term = apply_filters( 'inc2734_wp_breadcrumbs_main_term', $terms[0], $terms, $main_taxonomy, get_the_ID() );
 
 		$this->set_ancestors( $main_term->term_id, $taxonomy );
 		$this->set( $main_term->name, get_term_link( $main_term ) );
