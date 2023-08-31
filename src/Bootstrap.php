@@ -16,7 +16,7 @@ class Bootstrap {
 	 *
 	 * @var array
 	 */
-	protected $breadcrumbs = [];
+	protected $breadcrumbs = array();
 
 	/**
 	 * Constructor
@@ -42,7 +42,7 @@ class Bootstrap {
 		}
 
 		$controllers = array_filter(
-			[
+			array(
 				'Not_Found'  => is_404(),
 				'Search'     => is_search(),
 				'Taxonomy'   => is_tax() || is_category() || is_tag(),
@@ -52,7 +52,7 @@ class Bootstrap {
 				'Author'     => is_author(),
 				'Date'       => is_date(),
 				'Home'       => is_home() && ! is_front_page(),
-			]
+			)
 		);
 
 		if ( ! $controllers ) {
@@ -87,10 +87,10 @@ class Bootstrap {
 	 * @param string $link  Link url.
 	 */
 	protected function _set( $title, $link = '' ) {
-		$this->breadcrumbs[] = [
+		$this->breadcrumbs[] = array(
 			'title' => $title,
 			'link'  => $link,
-		];
+		);
 	}
 
 	/**

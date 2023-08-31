@@ -3,9 +3,9 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 class BreadcrumbsTest extends WP_UnitTestCase {
 
-	public function setup() {
+	public function set_up() {
 		global $wp_rewrite;
-		parent::setup();
+		parent::set_up();
 
 		$wp_rewrite->init();
 		$wp_rewrite->set_permalink_structure( '/%year%/%monthnum%/%day%/%postname%/' );
@@ -48,8 +48,8 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		add_filter( 'inc2734_wp_breadcrumbs_remove_last_link', '__return_false' );
 	}
 
-	public function tearDown() {
-		parent::tearDown();
+	public function tear_down() {
+		parent::tear_down();
 
 		update_option( 'show_on_front', 'posts' );
 		update_option( 'page_on_front', 0 );
@@ -170,7 +170,7 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 		$this->assertEquals(
 			[
 				[ 'title' => 'Home', 'link' => 'http://localhost:8889/' ],
-				[ 'title' => get_the_author_meta( 'user_login', $this->author ), 'link' => get_author_posts_url($newest_post->post_author) ],
+				[ 'title' => get_the_author_meta( 'user_login', $this->author_id ), 'link' => get_author_posts_url($newest_post->post_author) ],
 			],
 			$breadcrumbs->get()
 		);

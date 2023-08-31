@@ -19,7 +19,7 @@ abstract class Controller {
 	 *
 	 * @var array
 	 */
-	protected $breadcrumbs = [];
+	protected $breadcrumbs = array();
 
 	/**
 	 * Constructor.
@@ -42,10 +42,10 @@ abstract class Controller {
 	 * @param string $link  Link url.
 	 */
 	protected function set( $title, $link = '' ) {
-		$this->breadcrumbs[] = [
+		$this->breadcrumbs[] = array(
 			'title' => $title,
 			'link'  => $link,
-		];
+		);
 	}
 
 	/**
@@ -59,10 +59,10 @@ abstract class Controller {
 		krsort( $ancestors );
 
 		$post_types = get_post_types(
-			[
+			array(
 				'hierarchical' => true,
 				'public'       => true,
-			]
+			)
 		);
 
 		if ( in_array( $object_type, $post_types, true ) ) {
@@ -130,7 +130,7 @@ abstract class Controller {
 		if ( 'ja' === get_locale() ) {
 			$month .= '月';
 		} else {
-			$monthes = [
+			$monthes = array(
 				1  => 'January',
 				2  => 'February',
 				3  => 'March',
@@ -143,7 +143,7 @@ abstract class Controller {
 				10 => 'October',
 				11 => 'November',
 				12 => 'December',
-			];
+			);
 			$month   = $monthes[ $month ];
 		}
 		return $month;
