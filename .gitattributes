@@ -5,4 +5,5 @@
 .phpunit.xml.dist export-ignore
 .github export-ignore
 .wp-env.json export-ignore
+.wp-env.tests.json export-ignore
 tests export-ignore

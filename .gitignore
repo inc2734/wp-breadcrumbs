@@ -1,3 +1,5 @@
 .DS_Store
 vendor/
 node_modules/
+.wp-env.tests.override.json
+.phpcs-cache
